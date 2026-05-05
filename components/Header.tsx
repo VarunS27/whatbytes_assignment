@@ -79,6 +79,10 @@ export default function Header({ onSearch }: HeaderProps) {
               )}
             </div>
 
+            <div className="md:hidden w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+              <User size={18} className="text-white" />
+            </div>
+
             <div className="relative hidden md:block">
               <Link
                 href="/cart"

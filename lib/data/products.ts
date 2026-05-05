@@ -38,7 +38,7 @@ export const products: Product[] = [
     id: '4',
     title: 'Smartwatch',
     price: 249,
-    image: '/smartphone.png',
+    image: '/watch.png',
     category: 'Electronics',
     brand: 'Caycroy',
     description: 'Feature-rich smartwatch with health tracking',
@@ -49,7 +49,7 @@ export const products: Product[] = [
     id: '5',
     title: 'Sunglasses',
     price: 149,
-    image: '/t-shirt.png',
+    image: '/glasses.png',
     category: 'Clothing',
     brand: 'Caycroy',
     description: 'Premium sunglasses with UV protection',
@@ -89,16 +89,6 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: 512,
   },
-  {
-    id: '9',
-    title: 'Jeans',
-    price: 79,
-    image: '/bag.png',
-    category: 'Clothing',
-    brand: 'Caycroy',
-    description: 'Classic denim jeans for all occasions',
-    rating: 4.3,
-    reviews: 178,
-  },
+
 
 ];

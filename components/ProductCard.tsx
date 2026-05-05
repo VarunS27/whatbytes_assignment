@@ -26,12 +26,12 @@ export default function ProductCard({ product }: ProductCardProps) {
     <Link href={`/product/${product.id}`}>
       <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden cursor-pointer h-full flex flex-col">
         {/* Product Image */}
-        <div className="relative w-full h-48 bg-gray-200 overflow-hidden">
+        <div className="relative w-full h-64 bg-gray-100 flex items-center justify-center">
           <Image
             src={product.image}
             alt={product.title}
             fill
-            className="object-cover hover:scale-105 transition-transform"
+            className="object-contain hover:scale-105 transition-transform p-2"
           />
         </div>
 
