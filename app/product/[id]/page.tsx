@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, Star } from 'lucide-react';
 import { useCart } from '@/lib/hooks/useCart';
+import { useToastStore } from '@/lib/stores/toastStore';
 import { Product } from '@/lib/types';
 
 export default function ProductDetail() {
@@ -13,6 +14,7 @@ export default function ProductDetail() {
   const pathname = usePathname();
   const router = useRouter();
   const { addToCart } = useCart();
+  const addToast = useToastStore((s) => s.addToast);
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
@@ -91,6 +93,7 @@ export default function ProductDetail() {
   const handleAddToCart = () => {
     setIsAdding(true);
     addToCart(product, quantity);
+    addToast('Added to cart', 'success');
     setTimeout(() => {
       setIsAdding(false);
       router.push('/cart');
@@ -120,7 +123,9 @@ export default function ProductDetail() {
                 src={product.image}
                 alt={product.title}
                 fill
-                className="object-cover"
+                  className="object-cover"
+                  loading="eager"
+                  sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
           </div>

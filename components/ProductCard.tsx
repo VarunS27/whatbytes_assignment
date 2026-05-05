@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { useCart } from '@/lib/hooks/useCart';
+import { useToastStore } from '@/lib/stores/toastStore';
 
 interface ProductCardProps {
   product: Product;
@@ -13,12 +14,14 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
+  const addToast = useToastStore((s) => s.addToast);
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsAdding(true);
     addToCart(product, 1);
+    addToast('Added to cart', 'success');
     setTimeout(() => setIsAdding(false), 1000);
   };
 
@@ -32,6 +35,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={product.title}
             fill
             className="object-contain hover:scale-105 transition-transform p-2"
+            loading="eager"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
 

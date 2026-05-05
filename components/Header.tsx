@@ -14,6 +14,7 @@ export default function Header({ onSearch }: HeaderProps) {
   const { cart } = useCart();
   const [searchTerm, setSearchTerm] = useState('');
   const [mounted, setMounted] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function Header({ onSearch }: HeaderProps) {
             <button
               type="button"
               aria-label="Search"
+              onClick={() => setIsMobileSearchOpen((s) => !s)}
               className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/55 text-white"
             >
               <Search size={18} />
@@ -109,6 +111,39 @@ export default function Header({ onSearch }: HeaderProps) {
           </div>
         </div>
       </div>
+      {isMobileSearchOpen && (
+        <div className="md:hidden bg-[#08369b] px-4 pb-4">
+          <form
+            onSubmit={(e) => {
+              handleSearch(e);
+              setIsMobileSearchOpen(false);
+            }}
+            className="w-full max-w-2xl mx-auto"
+          >
+            <div className="relative">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/85">
+                <Search size={20} />
+              </div>
+              <input
+                type="text"
+                placeholder="Search for products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                autoFocus
+                className="w-full bg-transparent text-white placeholder-white/85 rounded-lg py-3 pl-14 pr-10 border border-white/55 focus:outline-none focus:ring-2 focus:ring-white/25"
+              />
+              <button
+                type="button"
+                aria-label="Close search"
+                onClick={() => setIsMobileSearchOpen(false)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/90"
+              >
+                ×
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </header>
   );
 }
