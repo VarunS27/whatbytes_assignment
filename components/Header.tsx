@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Search, User } from 'lucide-react';
 import { useCart } from '@/lib/hooks/useCart';
@@ -13,7 +13,12 @@ interface HeaderProps {
 export default function Header({ onSearch }: HeaderProps) {
   const { cart } = useCart();
   const [searchTerm, setSearchTerm] = useState('');
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +77,7 @@ export default function Header({ onSearch }: HeaderProps) {
               >
                 <ShoppingCart size={18} />
               </Link>
-              {cartItemCount > 0 && (
+              {mounted && cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center shadow">
                   {cartItemCount}
                 </span>
@@ -91,7 +96,7 @@ export default function Header({ onSearch }: HeaderProps) {
                 <ShoppingCart size={18} />
                 <span className="font-semibold">Cart</span>
               </Link>
-              {cartItemCount > 0 && (
+              {mounted && cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow">
                   {cartItemCount}
                 </span>
