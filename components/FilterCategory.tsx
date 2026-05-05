@@ -6,12 +6,14 @@ interface FilterCategoryProps {
   categories: string[];
   selectedCategories: string[];
   onCategoryChange: (categories: string[]) => void;
+  name?: string;
 }
 
 export default function FilterCategory({
   categories,
   selectedCategories,
   onCategoryChange,
+  name = 'category',
 }: FilterCategoryProps) {
   const selectedCategory = selectedCategories[0] ?? 'All';
 
@@ -22,7 +24,7 @@ export default function FilterCategory({
         <label className="flex items-center gap-3 cursor-pointer text-lg">
           <input
             type="radio"
-            name="category"
+            name={name}
             checked={selectedCategory === 'All'}
             onChange={() => onCategoryChange([])}
             className="h-5 w-5 border-2 border-white/60 bg-transparent text-blue-700 focus:ring-0"
@@ -34,7 +36,7 @@ export default function FilterCategory({
           <label key={category} className="flex items-center gap-3 cursor-pointer text-lg">
             <input
               type="radio"
-              name="category"
+              name={name}
               checked={selectedCategory === category}
               onChange={() => onCategoryChange([category])}
               className="h-5 w-5 border-2 border-white/60 bg-transparent text-blue-700 focus:ring-0"

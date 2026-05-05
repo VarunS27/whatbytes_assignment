@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { SlidersHorizontal } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import ProductGrid from '@/components/ProductGrid';
 import { products } from '@/lib/data/products';
@@ -28,6 +29,7 @@ export default function Home() {
   const searchParams = useSearchParams();
   const [fetchedProducts, setFetchedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   const categories = useMemo(() => getUniqueCategories(products), []);
   const maxPrice = useMemo(() => getMaxPrice(products), []);
@@ -106,11 +108,34 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="mb-4 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setIsMobileFilterOpen(true)}
+            className="inline-flex items-center gap-2 rounded-lg bg-[#08369b] px-4 py-2 text-white font-semibold"
+          >
+            <SlidersHorizontal size={18} />
+            <span>Filters</span>
+          </button>
+        </div>
+
+        <Sidebar
+          categories={sidebarCategories}
+          maxPrice={maxPrice}
+          selectedCategories={selectedCategories}
+          selectedPriceRange={selectedPriceRange}
+          onCategoryChange={handleCategoryChange}
+          onPriceChange={handlePriceChange}
+          mobileOnly
+          mobileOpen={isMobileFilterOpen}
+          onMobileClose={() => setIsMobileFilterOpen(false)}
+        />
+
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Product Listing</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar */}
-          <div className="lg:col-span-1">
+          <div className="hidden lg:block lg:col-span-1">
             <Sidebar
               categories={sidebarCategories}
               maxPrice={maxPrice}

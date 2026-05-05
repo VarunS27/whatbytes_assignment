@@ -36,7 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Product Info */}
-        <div className="p-4 flex-grow flex flex-col">
+        <div className="p-4 grow flex flex-col">
           <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 mb-2">{product.title}</h3>
 
           {/* Rating */}
