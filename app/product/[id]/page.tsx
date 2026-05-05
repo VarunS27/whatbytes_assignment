@@ -118,14 +118,14 @@ export default function ProductDetail() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg p-8">
           {/* Image Section */}
           <div className="flex items-center justify-center">
-            <div className="relative w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
+            <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
               <Image
                 src={product.image}
                 alt={product.title}
                 fill
-                  className="object-cover"
-                  loading="eager"
-                  sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-contain p-4"
+                loading="eager"
+                sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
           </div>
